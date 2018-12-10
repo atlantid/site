@@ -1,0 +1,50 @@
+TEMPLATE = app
+CONFIG += console
+CONFIG -= app_bundle
+CONFIG -= qt
+
+SOURCES += \
+        main.cpp
+QMAKE_CXXFLAGS += -std=c++17
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../usr/local/lib/release/ -lginac
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../usr/local/lib/debug/ -lginac
+else:unix: LIBS += -L$$PWD/../../../usr/local/lib/ -lginac
+
+INCLUDEPATH += $$PWD/../../../usr/local/include
+DEPENDPATH += $$PWD/../../../usr/local/include
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/release/libginac.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/debug/libginac.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/release/ginac.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/debug/ginac.lib
+else:unix: PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/libginac.a
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../../usr/local/lib/release/ -lcln
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../../usr/local/lib/debug/ -lcln
+else:unix: LIBS += -L$$PWD/../../../usr/local/lib/ -lcln
+
+INCLUDEPATH += $$PWD/../../../usr/local/include
+DEPENDPATH += $$PWD/../../../usr/local/include
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/release/libcln.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/debug/libcln.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/release/cln.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/debug/cln.lib
+else:unix: PRE_TARGETDEPS += $$PWD/../../../usr/local/lib/libcln.a
+
+
+
+
+    AT^U2DIAG=0 (режим: только модем)
+    AT^U2DIAG=1 (режим: модем + CD-ROM)
+    AT^U2DIAG=255 (режим: модем + CD-ROM + Card Reader)
+    AT^U2DIAG=256 (режим: модем + Card Reader)
+
+
+
+
+
+
+
+
