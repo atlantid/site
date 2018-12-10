@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <any>
+#include <string>
+#include <tuple>
+
+template<class T = double, int n = 2> auto Generate()
+{
+
+    if constexpr(n==0)
+    {
+        return T();
+    }
+
+    else
+    {
+        return Generate<std::vector<T>,n-1>();
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    std::tuple<int, double> d = {1, 2.3};
+    auto& [first, second] = d;
+    second = 9.8;
+    std::cout<<std::get<double>(d)<<std::endl;
+    auto matr = Generate<std::any>();
+    matr = {{1,2},{std::string("Привет"),4}};
+    std::cout<<std::any_cast<int>(matr[0][1])<<" "<<std::any_cast<std::string&>(matr[1][0])<<std::endl;
+    int aa;
+    std::cin>>aa;
+    return 0;
+}
+
+
